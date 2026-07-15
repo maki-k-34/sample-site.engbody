@@ -1,0 +1,21 @@
+/* mixin
+------------------------------------------ */
+
+@use 'sass:map';  // mapモジュールを呼び出す
+
+// メディアクエリ
+$breakpoint: (
+  'tab': 'screen and (min-width: 768px)',
+  'pc': 'screen and (min-width: 1024px)',
+  'pc2': 'screen and (min-width: 1312px)',
+  'max': 'screen and (min-width: 1440px)',
+);
+
+@mixin mq($bp) {
+  @media #{map.get($breakpoint, $bp)} {
+    @content;
+  }
+}
+
+
+// 各scssファイルでは@include s.mq(tab) で呼び出す

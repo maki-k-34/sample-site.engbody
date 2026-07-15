@@ -1,0 +1,136 @@
+/* faq
+------------------------------------------ */
+@use '../setting' as s;
+
+// scssファイル内での画像パスの書き方
+// .xxx {
+// background-image: url(#{s.$img-path}/fv_bg_sp.webp);
+// }
+
+.faq {
+  .container {
+    padding: 2.5rem 1.875rem 3.125rem;
+
+    @include s.mq(tab) {
+      padding: 3.75rem 1.875rem 4.375rem;
+    }
+
+    @include s.mq(pc2) {
+      padding: 3.75rem 0 4.375rem;
+    }
+  }
+
+  .section-title {
+    margin-bottom: .625rem;
+
+    &__jp {
+      color: s.$c_accent01;
+    }
+  }
+}
+
+
+/* アコーディオン */
+.accordion {
+
+  &__box {
+    border-bottom: 1px solid s.$c_border01;
+  }
+
+  // __title部分(contentクローズ時)
+  &__title {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 0 .9375rem;
+  }
+
+  &__title-text {
+    line-height: 1.7;
+    font-size: .875rem;
+    display: flex;
+    column-gap: .9375rem;
+    align-items: center;
+
+    @include s.mq(tab) {
+      font-size: .9375rem;
+    }
+  }
+
+  // Q、Aテキスト
+  &__title-q,
+  &__content-a {
+    font-size: 1.625rem;
+    color: s.$c_accent01;
+    font-weight: 700;
+  }
+
+  &__title-text-inner {
+    padding-bottom: .5rem;
+  }
+
+  // 矢印アイコン
+  &__title-icon {
+    position: relative;
+    display: inline-block;
+    width: 13.3px;
+    height: 7.7px;
+    transition: all .4s;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      height: 10px;
+      border-radius: 9999px;
+      background-color: s.$c_accent01;
+      transform-origin: 50% calc(100% - 1px);
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+//__title部分(contentオープン時)
+.accordion__box.is-active {
+
+  // アイコンの切替
+  .accordion__title-icon {
+    // 上下反転で切り替える場合
+    transform: scaleY(-1);
+  }
+}
+
+// content部分(回答部分)のスタイル
+.accordion {
+  &__content {
+    display: none; // 初期状態は非表示
+  }
+
+  &__content-inner {
+    font-size: .875rem;
+    display: flex;
+    // column-gap: .9375rem;
+    padding-bottom: 1.25rem;
+    column-gap: 1.125rem; //QとAの横幅違いの調整
+    padding-left: 0.25rem; //QとAの横幅違いの調整
+
+    @include s.mq(tab) {
+      font-size: .9375rem;
+    }
+  }
+
+  &__content-text {
+    padding-top: .5rem;
+  }
+}
