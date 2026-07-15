@@ -1,0 +1,338 @@
+/* component
+------------------------------------------ */
+@use '../setting' as s;
+
+/* コンテナ */
+.container {
+  max-width: 1110px;
+  width: 100%; //横スクロール防止
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* フォント */
+.josefin-sans {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+}
+
+// フォントスタイル変更
+.italic {
+  font-style: italic;
+}
+
+// フォントカラー変更
+.text-color-change {
+  color: s.$c_accent01;
+}
+
+/* 英字の変換 */
+// 英語 大文字に変換
+.uppercase {
+  text-transform: uppercase;
+}
+
+// 英語 各単語の先頭文字のみを大文字に変換
+.capitalize {
+  text-transform: capitalize;
+}
+
+/* ボタン 基本スタイル */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  &--cta {
+    background-color: s.$c_accent01;
+    color: s.$c_bg01;
+    letter-spacing: .05em;
+  }
+
+  &--header-cta {
+    min-width: 11.5rem;
+    min-height: 2.25rem;
+    border-radius: 100px;
+    font-size: .75rem;
+    padding: .6875rem 0;
+
+    @include s.mq(tab) {
+      min-width: 18.75rem;
+      min-height: 3.3125rem;
+      border-radius: 100px;
+      font-size: 1rem;
+      padding: 1.25rem 0;
+    }
+  }
+
+  &--fv-cta {
+    min-width: 13.75rem;
+    min-height: 3.3125rem;
+    border-radius: 50px;
+    font-size: .8125rem;
+    padding: 1.1875rem 0;
+
+    @include s.mq(tab) {
+      min-width: 23.125rem;
+      min-height: 5rem;
+      border-radius: 50px;
+      font-size: 1.25rem;
+      padding: 1.875rem 0;
+    }
+  }
+
+  &--sec-cta {
+    min-width: 18.75rem;
+    min-height: 3.3125rem;
+    border-radius: 50px;
+    font-size: .8125rem;
+    padding: 1.25rem 0;
+
+    @include s.mq(tab) {
+      min-width: 22.5rem;
+      min-height: 5rem;
+      font-size: 1.25rem;
+      padding: 1.8125rem 0;
+    }
+  }
+}
+
+/* セクションタイトル */
+.section-title {
+  line-height: 1;
+  margin-bottom: 1.875rem;
+
+  &__en,
+  &__jp {
+    display: block;
+  }
+
+  &__en {
+    font-size: 2.5rem;
+
+    @include s.mq(tab) {
+      font-size: 4rem;
+    }
+  }
+
+  &__jp {
+    font-size: .875rem;
+    font-weight: 700;
+    margin-top: .625rem;
+
+    @include s.mq(tab) {
+      font-size: 1.25rem;
+    }
+  }
+}
+
+/* セクション上下の波画像区切り */
+// セクション上部
+.wave-top {
+  margin-bottom: -1px; // サブピクセル丸めのため、次の要素と1pxだけ重ねる
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+// セクション下部
+.wave-bottom {
+  margin-top: -1px; // サブピクセル丸めのため、前の要素と1pxだけ重ねる
+
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
+/* セクション背景色変更 */
+.sec-bg-change {
+  background-color: s.$c_accent01;
+}
+
+/* ページトップボタン */
+.js-pagetop {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: s.$c_bg01;
+  border-radius: 50%;
+  box-shadow: 0px 0px 20px rgb(0 0 0 / 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0; //初期状態非表示
+  visibility: hidden; //初期状態非表示
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 100;
+  appearance: none; // button要素のデフォルトスタイルをリセット 必須(ress.cssにない)
+
+  @include s.mq(tab) {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  // 表示時
+  &.is-shown {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  //表示時のホバーアニメーション
+  @media (any-hover: hover) {
+    &.is-shown {
+
+      &:hover {
+        opacity: .8;
+      }
+    }
+  }
+
+  &__arrow {
+    position: relative;
+    display: inline-block;
+    width: 10.5px;
+    height: 6.2px;
+
+    @include s.mq(tab) {
+      width: 21.8px;
+      height: 11.9px;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      height: 8px;
+      border-radius: 9999px;
+      background-color: s.$c_accent01;
+      transform-origin: 50% 1px;
+
+      @include s.mq(tab) {
+        left: calc(50% - 1.5px);
+        width: 3px;
+        height: 16px;
+        transform-origin: 50% 1.5px;
+      }
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+
+/* スクロールアニメーション */
+// フェードインアニメーション（下から上に移動しながら表示）
+.fade-in {
+  opacity: 0; // 初期状態では非表示
+  transform: translateY(120px); // 初期状態では下方向に120pxずらす
+  transition: opacity .8s ease-in-out, transform .8s ease-in-out; // 透明度と変形を○秒かけてスムーズに変化
+}
+
+// スライドインアニメーション（右から左へ移動しながら表示）
+.slide-in {
+  opacity: 0; // 初期状態では非表示
+  transform: translateX(-150px); // 初期状態では右に150pxずらす
+  transition: opacity .6s cubic-bezier(0.645, 0.045, 0.355, 1), transform .6s cubic-bezier(0.645, 0.045, 0.355, 1); // 透明度と変形を○秒かけてスムーズに変化
+}
+
+// 【最終状態】要素が画面内に入ったとき（アニメーション完了時）
+.is-inview {
+  opacity: 1; // 完全に表示
+  transform: translateY(0) scale(1) translateX(0) rotateY(0); // 元の位置・サイズ・回転に戻す
+}
+
+
+/* リンク箇所のhover,focusアクション */
+// button要素にはopacityアニメーション
+@media (any-hover: hover) {
+  button:hover {
+    opacity: .8;
+  }
+}
+
+// CTAボタンには色反転
+@media (any-hover: hover) {
+  .button--cta:hover {
+    background-color: s.$c_bg01;
+    color: s.$c_accent01;
+    border: 1px solid s.$c_accent01;
+  }
+
+  .sub-footer {
+    .button--cta:hover {
+      background-color: s.$c_accent01;
+      color: s.$c_bg01;
+      border: 1px solid s.$c_bg01;
+    }
+  }
+}
+
+
+/* 改行指定 */
+// SP表示(767px以下)の時のみ改行指定
+@include s.mq(tab) {
+  .br-sp {
+    display: none;
+  }
+}
+
+/* 横に流れるテキスト(マーキー) */
+.marquee {
+  overflow: hidden;
+  padding: 2rem 0;
+
+  @include s.mq(tab) {
+    padding: 3.75rem 0;
+  }
+}
+
+.marquee__wrapper {
+  display: flex;
+  animation: marquee-scroll 10s linear infinite;
+  width: max-content; //幅の指定は必須。ガタツキの原因になる。
+}
+
+.marquee__text {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding-right: 2rem; // テキスト間の余白
+  font-size: 4.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .04em;
+  color: s.$c_accent01_t;
+
+  @include s.mq(tab) {
+    padding-right: 6rem; // テキスト間の余白
+    font-size: 9.375rem;
+  }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-16.6%); //6個複製したので100/6=16.6%
+  }
+}
