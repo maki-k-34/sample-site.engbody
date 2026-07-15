@@ -187,6 +187,10 @@ body address {
 }
 
 /* セクション上下の波画像区切り */
+.wave-top,
+.wave-bottom {
+  aspect-ratio: 1440 / 96;
+}
 .wave-top {
   margin-bottom: -1px;
 }
