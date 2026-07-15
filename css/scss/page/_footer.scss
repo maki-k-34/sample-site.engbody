@@ -1,0 +1,35 @@
+/* footer
+------------------------------------------ */
+@use '../setting' as s;
+
+// scssファイル内での画像パスの書き方
+// .xxx {
+// background-image: url(#{s.$img-path}/fv_bg_sp.webp);
+// }
+
+.footer {
+  background-color: s.$c_bg03;
+  padding: 1.875rem 0;
+
+  @include s.mq(tab) {
+    padding: 5rem 0;
+  }
+
+  &__logo {
+    width: 5.4375rem;
+    margin-inline: auto;
+
+    @include s.mq(tab) {
+      width: 11.25rem;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__logo-link {
+    display: block;
+    padding: 1.25rem 0;
+  }
+}
